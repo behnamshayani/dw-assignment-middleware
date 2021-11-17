@@ -1,0 +1,15 @@
+{
+  "name": "dw-assignment-middleware",
+  "version": "1.0.0",
+  "description": "Middleware API to merge product data and image date from DW backend API for frontend app.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "locally": "node -e \"console.log(require('./app').handler());\""
+  },
+  "author": "behnamshayani@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.24.0"
+  }
+}
