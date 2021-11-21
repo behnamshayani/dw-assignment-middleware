@@ -6,6 +6,7 @@ module.exports.getAllProducts = async () => {
         axios.get('https://assignment.dwbt.tech/images')
     ]).then(axios.spread((productsResponse, imagesResponse) => {
         // Both requests are now complete
+        fixImageUrls(imagesResponse);
         var rawProducts = productsResponse.data.products;
         const keys = Object.keys(rawProducts);
 
@@ -22,3 +23,17 @@ const linkImage = (productData, allImages) => {
     delete productData._links;
     return productData;
 };
+
+const fixImageUrls = (allImages) => {
+    var images = allImages.data.images;
+
+    Object.keys(images).forEach((sku, index) => {
+        var productImages = images[sku];
+        Object.keys(productImages).forEach((key, index) => {
+            productImages[key].src = productImages[key].src.replace(
+                'www.danielwellington.com',
+                'legacy-media.danielwellington.com'
+            );
+        });
+    });
+}
