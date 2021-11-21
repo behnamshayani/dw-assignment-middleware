@@ -1,0 +1,19 @@
+service: dw-assignment-middleware
+provider:
+    name: aws
+    runtime: nodejs12.x
+    region: eu-north-1
+    role: arn:aws:iam::633539841785:role/dwMiddleware
+    timeout: 5
+    stage: ${opt:stage, 'dev' }
+    memorySize: 128
+functions:
+  dipatcher:
+    handler: app.handler
+    description: Middleware API to merge product data and image date from DW backend API for frontend app
+    events:
+      - httpApi:
+          path: "/products"
+          method: get
+    exclude:
+      - package-lock.json
